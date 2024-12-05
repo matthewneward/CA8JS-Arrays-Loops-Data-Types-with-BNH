@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="matthew neward"> 
+    <title>CA8-BNH3</title>
+</head>
+<body>
+    <div> 
+        <p id="Playerchoice"></p>
+        <p id="Computerchoice"></p>
+        <p id="Finalresult"></p>
+        <p id="goodbyemessage"></p>
+        <script type="text/javascript">
+
+        //1. Welcome the player to the game using a prompt to collect their name:
+            let username= prompt(`Welcome to Bear Hunter Ninja! Please enter your name to get started:`);
+            let player= `${username}`;
+
+        //2. Alert to greet the player with a personalized message.
+            alert(`Hi ` + player +  ` Let\'s Play!!`);
+
+        //set up do loop for repeated gameplay
+        let repeatGame = null
+            do {
+
+        //3. Prompt the player's choice. and make case insensitive 
+        let playerChoice=`nothing`
+            while ((playerChoice != `Bear`) || (playerChoice != `Ninja`) || (playerChoice != `Hunter`)){
+                let playerChoiceCaseSensitive=prompt(`Who are you: Bear, Ninja, or Hunter?`);
+                let playerChoiceLowerCase=playerChoiceCaseSensitive.toLowerCase();
+                playerChoice=playerChoiceLowerCase[0].toUpperCase()+playerChoiceLowerCase.slice(1);
+                    if ((playerChoice != `Bear`) && (playerChoice != `Ninja`) && (playerChoice != `Hunter`)) {
+                        alert(`invalid choice, please restart game and put in a valid option`);
+                    } else {
+                        break;
+                    }
+            }
+        //4. Print the personalized game results to the html page and the console as depicted in Step 3 above, HTML on one side, the console output on the other.
+            document.getElementById('Playerchoice').innerHTML= player + `, you picked ` + playerChoice +`!`;
+            console.log(player + `, you picked ` + playerChoice + `!`);
+            alert(player + `, you picked ` + playerChoice + `!`);
+
+        //computer choice in array 
+            const computerChoiceArray=[`Bear`,`Ninja`,`Hunter`];
+
+        //computer's "decision"
+            let RNG=Math.floor(Math.random()*computerChoiceArray.length);
+            let computerChoice= computerChoiceArray[RNG];
+            const computer= `computer`;
+            document.getElementById('Computerchoice').innerHTML= `The ` + computer + `, picked ` + computerChoice + `!`;
+            console.log(`The ` + computer + `, picked ` + computerChoice + `!`);
+            alert(`The ` + computer + `, picked ` + computerChoice + `!`);
+
+        //switch board for user choice. going with nested switch since we have 2 variables to make the decision with.
+            let winResult
+            switch(true)
+            { 
+            case (playerChoice == `Bear` && computerChoice ==`Bear`): 
+            case (playerChoice == `Ninja` && computerChoice == `Ninja`):
+            case (playerChoice == `Hunter` && computerChoice == `Hunter`):
+                winResult= `tiegame`
+                break; 
+            case (playerChoice == `Bear` && computerChoice == `Ninja`):
+            case (playerChoice == `Ninja` && computerChoice == `Hunter`): 
+            case (playerChoice == `Hunter` && computerChoice == `Bear`): 
+                winResult= `playerwin`
+                break;
+            case (playerChoice == `Bear` && computerChoice == `Hunter`): 
+            case (playerChoice == `Ninja` && computerChoice == `Bear`):
+            case (playerChoice == `Hunter` && computerChoice == `Ninja`): 
+                winResult= `computerwin` 
+                break;
+            }
+
+
+             //final if else statement RETURN TO HERE LATER!!!
+            let result= null
+            if (winResult==`playerwin`) {
+                result= `You win!`;
+            } else if (winResult==`tiegame`) {
+                result=`It\'s a tie`;
+            } else if (winResult==`computerwin`) {
+                result=`Computer wins!`;
+            } else { 
+                console.log(`error, no win condition found`);
+            }
+            alert(result);
+            console.log(result);
+            document.getElementById('Finalresult').innerHTML=result;
+
+        //other half of do loop. 
+            repeatGame= prompt(`would you like to play again? yes/no`);
+        }
+            while (repeatGame.toLowerCase()===`yes`? true : false);
+            
+        //good bye message
+            console.log(`Thanks for playing, see you next time!`);
+            document.getElementById('goodbyemessage').innerHTML=`Thanks for playing, see you next time!`
+
+
+        </script>
+    </div>
+
+    </body>
+</html>
